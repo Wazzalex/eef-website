@@ -97,10 +97,6 @@
 }
 
 .card {
-  background: var(--color-background-surface);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  padding: var(--space-md);
   display: grid;
   gap: var(--space-xs);
 }
@@ -120,14 +116,6 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-xs) var(--space-sm);
-}
-
-.month {
-  font-weight: 700;
-  font-size: 0.8125rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-action-primary);
 }
 
 .badge {

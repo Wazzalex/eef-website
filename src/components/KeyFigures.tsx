@@ -1,10 +1,11 @@
 import { keyFigures } from "@/content/site";
+import { cx } from "@/lib/cx";
 import styles from "./KeyFigures.module.css";
 
 export default function KeyFigures() {
   return (
     <section className={styles.band} aria-label="Chiffres-clés de l'association">
-      <div className={`container ${styles.grid}`}>
+      <div className={cx("container", styles.grid)}>
         {keyFigures.map((f) => (
           <div key={f.label} className={styles.item}>
             <p className={styles.value}>

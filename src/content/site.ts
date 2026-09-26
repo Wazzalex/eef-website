@@ -12,9 +12,13 @@
  *   - une ligne qui commence par // est un commentaire, ignoré par le site
  *   - respecter les guillemets et les virgules
  */
+import type { IconName } from "@/components/illustrations/Icon";
 
 /** Lien vers le formulaire (Google Form) « Je veux aider ». */
 export const FORM_URL = "https://forms.gle/A-REMPLACER";
+
+/** Texte des boutons « Je veux aider » (en-tête, accueil, calendrier). */
+export const HELP_CTA = "Je veux aider";
 
 /** Adresse e-mail de contact de l'association (laisser vide pour ne rien afficher). */
 export const CONTACT_EMAIL = "";
@@ -30,6 +34,24 @@ export const association = {
   tagline: "L'association des parents d'élèves de l'école des Adrets-en-Belledonne",
   /** Année de création (l'association fête ses 25 ans en 2026). */
   foundedYear: 2001,
+};
+
+/** Titre et description affichés par Google et dans les aperçus de lien (WhatsApp, Facebook…). */
+export const seo = {
+  title: `${association.name} — ${association.tagline}`,
+  description:
+    "Depuis 25 ans, les parents d'élèves des Adrets-en-Belledonne organisent les événements du village pour financer les projets des enfants de l'école. Chaque parent est membre : venez donner un coup de main !",
+  shareTitle: `${association.name} · ${association.village}`,
+  shareDescription:
+    "L'association des parents d'élèves qui finance les projets des enfants de l'école des Adrets. Vous êtes parent ? Vous en faites déjà partie.",
+};
+
+/** Libellés du menu principal (dans l'ordre d'affichage). */
+export const nav = {
+  about: "L'association",
+  projects: "Les projets",
+  agenda: "L'année",
+  contact: "Contact",
 };
 
 /* ------------------------------------------------------------
@@ -59,21 +81,13 @@ export const lastYear = {
  *  PROJETS PÉDAGOGIQUES FINANCÉS CETTE ANNÉE
  *  (source : « Projets pédagogiques classes avec budget EEF »)
  * ------------------------------------------------------------ */
-export type ProjectIcon =
-  | "cirque"
-  | "livre"
-  | "lecture"
-  | "elevage"
-  | "classe"
-  | "numerique"
-  | "roller";
-
 export interface Project {
   /** Identifiant technique (sans accent ni espace). */
   id: string;
   title: string;
   description: string;
-  icon: ProjectIcon;
+  /** Icônes disponibles : voir src/components/illustrations/Icon.tsx. */
+  icon: IconName;
   /** Classes concernées. */
   classes: string[];
   /** Montant financé par l'EEF, en euros. */
@@ -328,29 +342,46 @@ export const seasons: Season[] = [
 /* ------------------------------------------------------------
  *  TEXTES DES SECTIONS
  * ------------------------------------------------------------ */
+
+/** En-tête commun des sections : sur-titre, titre, introduction. */
+export interface SectionHeading {
+  kicker: string;
+  title: string;
+  intro: string;
+}
+
 export const hero = {
   kicker: "Association de parents d'élèves · Les Adrets-en-Belledonne",
   title: "Aux Adrets, ce sont les parents qui font grandir l'école.",
   text: "Depuis 25 ans, École en Fête organise les rendez-vous du village pour financer les projets des enfants : cirque, livres, sorties, ski, spectacles… Vous êtes parent d'un élève ? Vous en faites déjà partie.",
-  primaryCta: "Je veux aider",
   secondaryCta: "Voir les projets financés",
 };
 
-export const about = {
+export interface InfoCard {
+  /** Icônes disponibles : voir src/components/illustrations/Icon.tsx. */
+  icon: IconName;
+  title: string;
+  text: string;
+}
+
+export const about: SectionHeading & { cards: InfoCard[] } = {
   kicker: "L'association",
   title: "Une association de parents, pour les enfants de l'école",
   intro:
     "Pas besoin d'être spécialiste ni d'avoir du temps toutes les semaines : l'EEF, c'est des parents qui donnent un coup de main quand ils le peuvent. Une heure sur un stand, un gâteau, une idée… tout compte.",
   cards: [
     {
+      icon: "membre",
       title: "Vous êtes déjà membre",
       text: "Chaque parent d'élève de l'école des Adrets est automatiquement membre de l'association. Vous pouvez donner votre avis, voter à l'assemblée générale et porter un projet.",
     },
     {
+      icon: "cycle",
       title: "Comment ça marche",
       text: "Les parents organisent les événements du village. Les bénéfices sont reversés à l'école et financent les projets choisis avec les enseignants, classe par classe.",
     },
     {
+      icon: "montagne",
       title: "Une force rare pour un village",
       text: "Entre 8 000 et 10 000 € reversés chaque année aux enfants de l'école : peu de villages peuvent compter sur une dynamique pareille. Elle ne tient qu'à nous, les parents.",
     },
@@ -372,9 +403,14 @@ export const timelineSection = {
   title: "Où et quand donner un coup de main",
   intro:
     "Une dizaine de rendez-vous par an, portés par les parents. Chacun finance une partie des projets des enfants : choisissez celui qui vous plaît.",
-  cta: "Je veux aider",
   raisedLabel: "L'an dernier",
   helpLabel: "On a besoin de vous pour",
+  /** Étiquette affichée sur chaque carte, selon le type de rendez-vous. */
+  kindLabels: {
+    event: "Événement",
+    meeting: "Réunion",
+    gift: "Offert aux enfants",
+  } satisfies Record<EventKind, string>,
 };
 
 export const contactSection = {
@@ -383,4 +419,10 @@ export const contactSection = {
   text: "Dites-nous simplement ce que vous aimeriez faire : tenir un stand, cuisiner, prêter du matériel, rejoindre le bureau… On vous recontacte vite.",
   cta: "Remplir le formulaire",
   fallback: "Le formulaire arrive très bientôt. En attendant, venez nous voir à la sortie de l'école ou lors de l'assemblée générale de rentrée.",
+  emailLabel: "Par e-mail :",
+};
+
+export const footer = {
+  member: "Chaque parent d'élève est automatiquement membre de l'association.",
+  credits: "Site réalisé par des parents bénévoles.",
 };

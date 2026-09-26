@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { cx } from "@/lib/cx";
 import styles from "./Gauge.module.css";
 
 interface GaugeProps {
@@ -41,17 +42,14 @@ export default function Gauge({ percent, label, tone = "blue", size = "sm" }: Ga
   return (
     <div
       ref={ref}
-      className={`${styles.track} ${styles[size]} ${styles[tone]}`}
+      className={cx(styles.track, styles[size], styles[tone])}
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={value}
       aria-label={label}
     >
-      <div
-        className={`${styles.fill} ${value === 0 ? styles.empty : ""}`}
-        style={{ width: visible ? `${value}%` : "0%" }}
-      />
+      <div className={cx(styles.fill, value === 0 && styles.empty)} style={{ width: visible ? `${value}%` : "0%" }} />
     </div>
   );
 }
