@@ -48,7 +48,10 @@ export default function Gauge({ percent, label, tone = "blue", size = "sm" }: Ga
       aria-valuenow={value}
       aria-label={label}
     >
-      <div className={styles.fill} style={{ width: visible ? `${value}%` : "0%" }} />
+      <div
+        className={`${styles.fill} ${value === 0 ? styles.empty : ""}`}
+        style={{ width: visible ? `${value}%` : "0%" }}
+      />
     </div>
   );
 }
