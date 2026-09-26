@@ -5,15 +5,16 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Timeline from "@/components/Timeline";
 import Footer from "@/components/Footer";
+import { anchorHref, anchors } from "@/lib/links";
 
 export default function HomePage() {
   return (
     <>
-      <a className="skip-link" href="#contenu">
+      <a className="skip-link" href={anchorHref("content")}>
         Aller au contenu
       </a>
       <Header />
-      <main id="contenu">
+      <main id={anchors.content}>
         <Hero />
         <KeyFigures />
         <About />

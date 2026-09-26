@@ -30,11 +30,6 @@
 }
 
 .yearKicker {
-  font-weight: 700;
-  font-size: 0.8125rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-action-primary);
   margin-bottom: var(--space-2xs);
 }
 
@@ -116,22 +111,6 @@
 
 .projectHead h3 {
   font-size: 1.1875rem;
-}
-
-.projectIcon {
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  background: var(--color-background-soft);
-  color: var(--color-action-primary);
-  display: grid;
-  place-items: center;
-}
-
-.projectIcon svg {
-  width: 26px;
-  height: 26px;
 }
 
 .projectText {

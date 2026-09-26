@@ -18,9 +18,3 @@ export function fr(text: string): string {
     .replace(/« /g, "« ")
     .replace(/ »/g, " »");
 }
-
-/** Lien du formulaire : tant qu'il n'est pas configuré, on renvoie vers la section contact. */
-export function helpLink(formUrl: string): { href: string; external: boolean } {
-  const configured = formUrl.startsWith("http") && !formUrl.includes("A-REMPLACER");
-  return configured ? { href: formUrl, external: true } : { href: "#contact", external: false };
-}

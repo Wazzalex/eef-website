@@ -1,47 +1,50 @@
-import { CONTACT_EMAIL, FORM_URL, association, contactSection } from "@/content/site";
-import { fr, helpLink } from "@/lib/format";
+import { CONTACT_EMAIL, association, contactSection, footer } from "@/content/site";
 import { asset } from "@/lib/assets";
+import { cx } from "@/lib/cx";
+import { fr } from "@/lib/format";
+import { anchors, isHelpFormReady } from "@/lib/links";
+import HelpLink from "./HelpLink";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
-  const help = helpLink(FORM_URL);
   const year = new Date().getFullYear();
 
   return (
-    <footer id="contact" className={styles.footer}>
-      <div className={`container ${styles.inner}`}>
+    <footer id={anchors.contact} className={styles.footer}>
+      <div className={cx("container", styles.inner)}>
         <div className={styles.contact}>
-          <span className={`kicker ${styles.kicker}`}>{contactSection.kicker}</span>
+          <span className={cx("kicker", styles.kicker)}>{contactSection.kicker}</span>
           <h2>{fr(contactSection.title)}</h2>
           <p className={styles.text}>{fr(contactSection.text)}</p>
-          {help.external ? (
-            <a className="btn btn--sun" href={help.href} target="_blank" rel="noopener">
-              {contactSection.cta}
-            </a>
+          {isHelpFormReady ? (
+            <HelpLink className="btn btn--sun">{contactSection.cta}</HelpLink>
           ) : (
             <p className={styles.fallback}>{fr(contactSection.fallback)}</p>
           )}
           {CONTACT_EMAIL ? (
             <p className={styles.email}>
-              Par e-mail : <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+              {fr(contactSection.emailLabel)} <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
             </p>
           ) : null}
         </div>
 
         <div className={styles.brand}>
-          <img src={asset("/logo-blanc.svg")} alt="École en Fête — Les Adrets en Belledonne" width={180} height={137} />
+          <img
+            src={asset("/logo-blanc.svg")}
+            alt={`${association.name} — ${association.village}`}
+            width={180}
+            height={137}
+          />
           <p className={styles.tagline}>{association.tagline}</p>
-          <p className={styles.member}>
-            Chaque parent d'élève est automatiquement membre de l'association.
-          </p>
+          <p className={styles.member}>{footer.member}</p>
         </div>
       </div>
 
-      <div className={`container ${styles.legal}`}>
+      <div className={cx("container", styles.legal)}>
         <p>
           © {year} {association.name} · {association.village}
         </p>
-        <p>Site réalisé par des parents bénévoles.</p>
+        <p>{footer.credits}</p>
       </div>
     </footer>
   );

@@ -155,14 +155,20 @@ p {
   }
 }
 
+/* Petites capitales bleues : sur-titres, mois du calendrier… */
+.overline,
 .kicker {
-  display: inline-block;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.8125rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-action-primary);
+}
+
+/* Sur-titre placé au-dessus d'un titre de section */
+.kicker {
+  display: inline-block;
   margin-bottom: var(--space-sm);
 }
 
