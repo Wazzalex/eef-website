@@ -1,0 +1,193 @@
+.section {
+  background: var(--color-background-surface);
+  border-top: 1px solid var(--color-border-default);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+/* --- jauge de l'année --- */
+.yearCard {
+  background: var(--color-background-base);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-xl);
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 720px) {
+  .yearCard {
+    padding: var(--space-lg);
+  }
+}
+
+.yearHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.yearKicker {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-action-primary);
+  margin-bottom: var(--space-2xs);
+}
+
+.yearAmount,
+.yearRaised {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.yearAmount strong,
+.yearRaised strong {
+  font-weight: 700;
+  font-size: 1.75rem;
+}
+
+.yearRaised {
+  color: var(--color-action-primary);
+}
+
+.yearFoot {
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+}
+
+@media (min-width: 840px) {
+  .yearFoot {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+.yearRef strong {
+  color: var(--color-text-primary);
+}
+
+/* --- grille des projets --- */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  background: var(--color-background-base);
+}
+
+.previous {
+  background: var(--color-background-surface);
+  border-style: dashed;
+}
+
+.projectHead {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.projectHead h3 {
+  font-size: 1.1875rem;
+}
+
+.projectIcon {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--color-background-soft);
+  color: var(--color-action-primary);
+  display: grid;
+  place-items: center;
+}
+
+.projectIcon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.projectText {
+  color: var(--color-text-muted);
+  font-size: 0.9375rem;
+  flex-grow: 1;
+}
+
+.classes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.classes li {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  background: var(--color-background-soft);
+  color: var(--color-action-primary);
+}
+
+.amountRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.share {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.note {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.partners {
+  margin-top: var(--space-lg);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  max-width: 80ch;
+}
