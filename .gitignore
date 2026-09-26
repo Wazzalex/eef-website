@@ -1,0 +1,17 @@
+# dépendances
+node_modules/
+
+# fichiers générés par Next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+
+# déclinaisons du logo générées par scripts/logo-variants.mjs
+public/logo-blanc.svg
+public/logo-bleu.svg
+
+# divers
+.DS_Store
+.env*.local
+npm-debug.log*
