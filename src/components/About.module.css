@@ -1,0 +1,40 @@
+.grid {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.card p {
+  color: var(--color-text-muted);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--color-background-soft);
+  display: grid;
+  place-items: center;
+}
+
+.icon svg {
+  width: 26px;
+  height: 26px;
+  fill: none;
+  stroke: var(--color-action-primary);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

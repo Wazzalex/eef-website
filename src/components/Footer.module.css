@@ -1,0 +1,82 @@
+.footer {
+  background: var(--color-action-primary);
+  color: var(--color-text-inverse);
+  padding-top: var(--space-2xl);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-xl);
+  padding-bottom: var(--space-xl);
+}
+
+@media (min-width: 840px) {
+  .inner {
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+}
+
+.kicker {
+  color: var(--color-accent-sun);
+}
+
+.contact h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.text {
+  font-size: 1.125rem;
+  max-width: 56ch;
+  margin-bottom: var(--space-md);
+  opacity: 0.95;
+}
+
+.fallback {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-sm);
+  padding: var(--space-sm) var(--space-md);
+  max-width: 56ch;
+}
+
+.email {
+  margin-top: var(--space-sm);
+}
+
+.email a {
+  color: var(--color-text-inverse);
+  font-weight: 700;
+}
+
+.brand {
+  display: grid;
+  gap: var(--space-sm);
+  justify-items: start;
+}
+
+.brand img {
+  width: 180px;
+  height: auto;
+}
+
+.tagline {
+  font-weight: 700;
+}
+
+.member {
+  opacity: 0.9;
+  font-size: 0.9375rem;
+}
+
+.legal {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  padding-block: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+  font-size: 0.8125rem;
+  opacity: 0.85;
+}

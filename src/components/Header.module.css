@@ -1,0 +1,129 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 248, 231, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border-default);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  min-height: 72px;
+  padding-block: 6px;
+  position: relative;
+}
+
+.brand {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* La charte impose un logo d'au moins 120 px à l'écran. */
+.brand img {
+  width: 120px;
+  height: auto;
+}
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: var(--space-md);
+}
+
+.nav a {
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  padding: 6px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  border-bottom-color: var(--color-action-primary);
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  cursor: pointer;
+}
+
+.burger span {
+  display: block;
+  height: 2.5px;
+  width: 100%;
+  background: var(--color-text-primary);
+  border-radius: 2px;
+}
+
+.burger:focus-visible {
+  outline: 3px solid var(--color-action-primary);
+}
+
+@media (max-width: 839px) {
+  .burger {
+    display: flex;
+  }
+
+  .nav {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    background: var(--color-background-surface);
+    border-bottom: 1px solid var(--color-border-default);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .navOpen {
+    display: block;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--space-xs) var(--gutter);
+  }
+
+  .nav a {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-background-soft);
+    font-size: 1.0625rem;
+  }
+
+  .nav li:last-child a {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 419px) {
+  .actions .btn {
+    display: none;
+  }
+}
