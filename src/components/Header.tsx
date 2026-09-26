@@ -24,7 +24,7 @@ export default function Header() {
           <img src={asset("/logo.svg")} alt="" width={120} height={91} fetchPriority="high" />
         </a>
 
-        <nav className={`${styles.nav} ${open ? styles.navOpen : ""}`} aria-label="Navigation principale">
+        <nav id="menu-mobile" className={`${styles.nav} ${open ? styles.navOpen : ""}`} aria-label="Navigation principale">
           <ul>
             {links.map((l) => (
               <li key={l.href}>
