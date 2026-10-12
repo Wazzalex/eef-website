@@ -19,8 +19,8 @@ export function fr(text: string): string {
     .replace(/ »/g, " »");
 }
 
-/** Lien du formulaire : tant qu'il n'est pas configuré, on renvoie vers la section contact. */
-export function helpLink(formUrl: string): { href: string; external: boolean } {
-  const configured = formUrl.startsWith("http") && !formUrl.includes("A-REMPLACER");
-  return configured ? { href: formUrl, external: true } : { href: "#contact", external: false };
+/** « Nadia, Yamuna et Stéphane » */
+export function joinNames(names: string[]): string {
+  if (names.length <= 1) return names.join("");
+  return `${names.slice(0, -1).join(", ")} et ${names[names.length - 1]}`;
 }

@@ -1,27 +1,25 @@
-import {
-  SCHOOL_YEAR,
-  lastYear,
-  partnerProjects,
-  projects,
-  projectsSection,
-  seasons,
-} from "@/content/site";
+import { SCHOOL_YEAR, lastYear, partnerProjects, projects, projectsSection } from "@/content/site";
 import { formatEuro, fr } from "@/lib/format";
 import Gauge from "./Gauge";
+import StackedBar from "./StackedBar";
 import ProjectIcon from "./illustrations/ProjectIcon";
 import styles from "./Projects.module.css";
 
+/** Couleurs de la charte pour la répartition du bilan. */
+const SEGMENT_COLORS = ["#2A6496", "#F5C451", "#E2643F", "#7A9EC0", "#1B2733"];
+
 export default function Projects() {
+  /* --- bilan de l'an dernier --- */
+  const contributions = lastYear.contributions.map((c, i) => ({
+    ...c,
+    color: SEGMENT_COLORS[i % SEGMENT_COLORS.length],
+  }));
+  const givenTotal = contributions.reduce((sum, c) => sum + c.amount, 0);
+
+  /* --- projets de l'année --- */
   const counted = projects.filter((p) => p.countsInTotal !== false);
   const total = counted.reduce((sum, p) => sum + p.amount, 0);
-  const maxAmount = Math.max(...counted.map((p) => p.amount));
   const classesCount = new Set(counted.flatMap((p) => p.classes)).size;
-
-  const allEvents = seasons.flatMap((s) => s.events);
-  const raisedThisYear = allEvents.reduce((sum, e) => sum + (e.raisedThisYear ?? 0), 0);
-  const nextEvent = allEvents.find((e) => e.kind === "event" && e.raisedThisYear == null);
-  const yearPercent = total > 0 ? (raisedThisYear / total) * 100 : 0;
-  const lastYearForChildren = lastYear.donation + lastYear.extras;
 
   return (
     <section id="projets" className={`section ${styles.section}`}>
@@ -32,53 +30,51 @@ export default function Projects() {
           <p className="lead">{fr(projectsSection.intro)}</p>
         </div>
 
-        {/* Jauge de l'année */}
-        <div className={styles.yearCard}>
-          <div className={styles.yearHead}>
-            <div>
-              <p className={styles.yearKicker}>
-                {projectsSection.gaugeTitle} · {SCHOOL_YEAR}
-              </p>
-              <p className={styles.yearAmount}>
-                <strong>{formatEuro(total)}</strong> de projets pour {classesCount} classes
-              </p>
-            </div>
-            <p className={styles.yearRaised}>
-              <strong>{formatEuro(raisedThisYear)}</strong> récoltés à ce jour
-            </p>
-          </div>
-          <Gauge
-            percent={yearPercent}
-            tone="sun"
-            size="lg"
-            label={`${formatEuro(raisedThisYear)} récoltés sur ${formatEuro(total)}`}
+        {/* Bilan de l'an dernier */}
+        <div className={styles.impactCard}>
+          <p className={styles.impactKicker}>Bilan {lastYear.label}</p>
+          <p className={styles.impactHeadline}>
+            <strong>{formatEuro(givenTotal)}</strong> {fr(projectsSection.impactTitle)}
+          </p>
+          <StackedBar
+            segments={contributions}
+            label={`Répartition des ${formatEuro(givenTotal)} consacrés aux enfants en ${lastYear.label}`}
           />
-          <div className={styles.yearFoot}>
-            <p>{fr(projectsSection.gaugeText)}</p>
-            <p className={styles.yearRef}>
-              {nextEvent ? (
-                <>
-                  Prochain rendez-vous : <strong>{nextEvent.title}</strong> ({nextEvent.month.toLowerCase()}).{" "}
-                </>
-              ) : null}
-              L'an dernier ({lastYear.label}), les événements ont rapporté {formatEuro(lastYear.eventsProfit)} et
-              l'association a consacré plus de {formatEuro(Math.floor(lastYearForChildren / 100) * 100)} aux enfants.
-            </p>
-          </div>
+          <ul className={styles.legend}>
+            {contributions.map((c) => (
+              <li key={c.label}>
+                <span className={styles.swatch} style={{ background: c.color }} aria-hidden="true" />
+                <span className={styles.legendLabel}>{fr(c.label)}</span>
+                <span className={styles.legendAmount}>{formatEuro(c.amount)}</span>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.impactNote}>
+            <strong>{formatEuro(lastYear.eventsProfit)}</strong> {fr(projectsSection.impactText)}
+          </p>
         </div>
 
-        {/* Projets */}
+        {/* Projets de l'année */}
+        <div className={styles.projectsHead}>
+          <h3>
+            {fr(projectsSection.projectsTitle)} <span className={styles.year}>· {SCHOOL_YEAR}</span>
+          </h3>
+          <p>
+            <strong>{formatEuro(total)}</strong> engagés pour {classesCount} classes. {fr(projectsSection.projectsText)}
+          </p>
+        </div>
+
         <ul className={styles.grid} aria-label="Projets financés">
           {projects.map((p) => {
-            const share = p.countsInTotal === false ? null : (p.amount / total) * 100;
-            const barPercent = (p.amount / maxAmount) * 100;
+            const budget = p.totalBudget ?? p.amount;
+            const share = Math.round((p.amount / budget) * 100);
             return (
               <li key={p.id} className={`card ${styles.project} ${p.countsInTotal === false ? styles.previous : ""}`}>
                 <div className={styles.projectHead}>
                   <span className={styles.projectIcon}>
                     <ProjectIcon name={p.icon} />
                   </span>
-                  <h3>{fr(p.title)}</h3>
+                  <h4>{fr(p.title)}</h4>
                 </div>
                 <p className={styles.projectText}>{fr(p.description)}</p>
                 <ul className={styles.classes} aria-label="Classes concernées">
@@ -89,13 +85,19 @@ export default function Projects() {
                 <div className={styles.amountRow}>
                   <span className={styles.amount}>{formatEuro(p.amount)}</span>
                   <span className={styles.share}>
-                    {share == null ? "budget précédent" : `${Math.round(share)} % du budget de l'année`}
+                    financé à <strong>{share}&nbsp;%</strong> par l'EEF
                   </span>
                 </div>
                 <Gauge
-                  percent={barPercent}
-                  label={`${p.title} : ${formatEuro(p.amount)} financés par l'association`}
+                  percent={share}
+                  label={`${p.title} : ${formatEuro(p.amount)} financés par l'EEF, soit ${share} % du budget`}
                 />
+                {p.coFunding ? (
+                  <p className={styles.note}>
+                    Complément apporté par {fr(p.coFunding)}
+                    {p.totalBudget ? ` (budget total : ${formatEuro(p.totalBudget)})` : ""}.
+                  </p>
+                ) : null}
                 {p.note ? <p className={styles.note}>{fr(p.note)}</p> : null}
               </li>
             );

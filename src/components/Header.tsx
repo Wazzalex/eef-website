@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FORM_URL, hero } from "@/content/site";
-import { helpLink } from "@/lib/format";
+import { hero } from "@/content/site";
 import { asset } from "@/lib/assets";
 import styles from "./Header.module.css";
 
@@ -15,7 +14,6 @@ const links = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const help = helpLink(FORM_URL);
 
   return (
     <header className={styles.header}>
@@ -24,7 +22,7 @@ export default function Header() {
           <img src={asset("/logo.svg")} alt="" width={120} height={91} fetchPriority="high" />
         </a>
 
-        <nav className={`${styles.nav} ${open ? styles.navOpen : ""}`} aria-label="Navigation principale">
+        <nav id="menu-mobile" className={`${styles.nav} ${open ? styles.navOpen : ""}`} aria-label="Navigation principale">
           <ul>
             {links.map((l) => (
               <li key={l.href}>
@@ -37,12 +35,7 @@ export default function Header() {
         </nav>
 
         <div className={styles.actions}>
-          <a
-            className="btn btn--sun btn--small"
-            href={help.href}
-            target={help.external ? "_blank" : undefined}
-            rel={help.external ? "noopener" : undefined}
-          >
+          <a className="btn btn--sun btn--small" href="#agenda">
             {hero.primaryCta}
           </a>
           <button
