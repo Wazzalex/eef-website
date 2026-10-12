@@ -3,7 +3,7 @@
  *  CONTENU DU SITE — c'est ici que tout se modifie.
  * ============================================================
  *
- *  Chiffres-clés, bilan de l'an dernier, projets financés, calendrier
+ *  Chiffres-clés, ce que l'EEF a financé l'an dernier, calendrier
  *  de l'année, contact… Tout le texte affiché sur le site vient de ce
  *  fichier. Les composants (dans src/components) ne font que l'afficher.
  *
@@ -15,9 +15,6 @@
 
 /** Adresse e-mail de l'association : destinataire du formulaire de contact. */
 export const CONTACT_EMAIL = "ecolenfete@gmail.com";
-
-/** Année scolaire affichée sur le site. */
-export const SCHOOL_YEAR = "2026-2027";
 
 export const association = {
   name: "École en Fête",
@@ -40,135 +37,99 @@ export const keyFigures = [
 ];
 
 /* ------------------------------------------------------------
- *  BILAN DE L'ANNÉE PASSÉE (source : bilan financier)
- *  Ce que l'association a concrètement apporté aux enfants.
- * ------------------------------------------------------------ */
-export const lastYear = {
-  label: "2025-2026",
-  /** Bénéfices de tous les événements organisés par les parents. */
-  eventsProfit: 8575,
-  /** Détail de ce qui a été consacré aux enfants (le total est calculé automatiquement). */
-  contributions: [
-    { label: "Projets des classes (don à l'école)", amount: 8500 },
-    { label: "Concert des enfants à Festirock", amount: 1534 },
-    { label: "Spectacle de Noël", amount: 230 },
-    { label: "Cadeaux des CM2", amount: 158 },
-  ],
-};
-
-/* ------------------------------------------------------------
- *  PROJETS PÉDAGOGIQUES FINANCÉS CETTE ANNÉE
- *  (source : « Projets pédagogiques classes avec budget EEF »)
+ *  CE QUE L'EEF A FINANCÉ L'AN DERNIER (source : bilan financier)
  *
- *  amount      : ce que l'EEF finance, en euros
- *  totalBudget : budget total du projet, si l'EEF n'est pas le seul
- *                financeur (sinon, laisser vide = financé à 100 %)
- *  coFunding   : qui complète le financement (affiché sous la jauge)
+ *  Le bloc « Ce que l'EEF finance » ne parle que de l'année passée :
+ *  il montre concrètement ce que les événements ont permis d'offrir
+ *  aux enfants. Le total (somme des montants) est calculé automatiquement
+ *  et chaque poste est illustré par une jauge = sa part dans ce total.
+ *
+ *  Chaque été, après le bilan, il suffit de :
+ *   1. changer `label` et `eventsProfit`
+ *   2. mettre à jour la liste `fundings` (un bloc par poste)
+ *
+ *  icon : "classe" | "nature" | "concert" | "spectacle" | "cadeau"
+ *         | "cirque" | "livre" | "lecture" | "elevage" | "numerique" | "roller"
+ *  who  : pour qui (facultatif, affiché en pastille)
+ *  note : précision affichée en petit (facultatif)
  * ------------------------------------------------------------ */
-export type ProjectIcon =
+export type FundingIcon =
+  | "classe"
+  | "nature"
+  | "concert"
+  | "spectacle"
+  | "cadeau"
   | "cirque"
   | "livre"
   | "lecture"
   | "elevage"
-  | "classe"
   | "numerique"
   | "roller";
 
-export interface Project {
+export interface Funding {
   /** Identifiant technique (sans accent ni espace). */
   id: string;
   title: string;
   description: string;
-  icon: ProjectIcon;
-  /** Classes concernées. */
-  classes: string[];
-  /** Montant financé par l'EEF, en euros. */
+  icon: FundingIcon;
+  /** Montant versé par l'EEF, en euros. */
   amount: number;
-  /** Budget total du projet (si différent du montant EEF). */
-  totalBudget?: number;
-  /** Autre financeur, s'il y en a un. */
-  coFunding?: string;
+  /** Pour qui (ex : "Toute l'école", "Les CM2"). */
+  who?: string;
   /** Précision affichée en petit (facultatif). */
   note?: string;
-  /** false = financé sur le budget précédent, non compté dans le total de l'année. */
-  countsInTotal?: boolean;
 }
 
-export const projects: Project[] = [
-  {
-    id: "livre",
-    title: "Un livre créé avec Anne Peyremorte",
-    description:
-      "Un projet d'écriture et de création mené sur toute l'année avec une intervenante : les enfants imaginent, écrivent et fabriquent leur propre livre.",
-    icon: "livre",
-    classes: ["GS-CP", "CP-CE1-CE2", "CE2-CM1", "CM1-CM2"],
-    amount: 2700,
-    totalBudget: 2800,
-    coFunding: "la coopérative de la classe de GS-CP",
-  },
-  {
-    id: "cirque",
-    title: "Ateliers cirque",
-    description:
-      "Équilibre, jonglage, acrobaties : un cycle d'ateliers avec des intervenants professionnels pour les plus petits.",
-    icon: "cirque",
-    classes: ["PS-MS", "GS-CP"],
-    amount: 1000,
-  },
-  {
-    id: "budget-classe",
-    title: "Budget de classe & complément ski",
-    description:
-      "Une enveloppe libre pour chaque classe : sorties, matériel, ou complément des séances de ski de l'hiver.",
-    icon: "classe",
-    classes: ["PS-MS", "CP-CE1-CE2", "CE2-CM1", "CM1-CM2"],
-    amount: 630,
-  },
-  {
-    id: "incorruptibles",
-    title: "Prix des Incorruptibles",
-    description:
-      "Le grand prix littéraire des jeunes lecteurs : chaque classe lit une sélection de livres et vote pour son préféré.",
-    icon: "lecture",
-    classes: ["PS-MS", "GS-CP", "CP-CE1-CE2", "CE2-CM1", "CM1-CM2"],
-    amount: 280,
-    note: "La sélection de la GS-CP a été financée dès 2026.",
-  },
-  {
-    id: "elevage",
-    title: "Un élevage en classe",
-    description:
-      "Observer, nourrir, prendre soin : un petit élevage vivant dans la classe pour apprendre les sciences en vrai.",
-    icon: "elevage",
-    classes: ["PS-MS", "GS-CP", "CP-CE1-CE2", "CE2-CM1", "CM1-CM2"],
-    amount: 280,
-    totalBudget: 350,
-    coFunding: "la coopérative de la classe de GS-CP",
-  },
-  {
-    id: "numerique",
-    title: "Abonnements numériques",
-    description:
-      "Des ressources pédagogiques en ligne pour travailler autrement en classe.",
-    icon: "numerique",
-    classes: ["CP-CE1-CE2", "CE2-CM1", "CM1-CM2"],
-    amount: 150,
-  },
-  {
-    id: "roller",
-    title: "Cycle roller",
-    description: "Un cycle d'initiation au roller pour les CE1-CE2.",
-    icon: "roller",
-    classes: ["CE1-CE2"],
-    amount: 300,
-    note: "Financé sur le budget 2025-2026.",
-    countsInTotal: false,
-  },
-];
-
-/** Projets menés gratuitement par des partenaires (affichés en note). */
-export const partnerProjects =
-  "D'autres projets sont portés gratuitement par la communauté de communes, la mairie et la coopérative scolaire : agriculture, défi énergie, concours PLUME « les petits Molières », vélo, natation et spectacles à l'Espace Aragon.";
+export const lastYear: { label: string; eventsProfit: number; fundings: Funding[] } = {
+  label: "2025-2026",
+  /** Bénéfices de tous les événements organisés par les parents cette année-là. */
+  eventsProfit: 8575,
+  /** Ce qui a été consacré aux enfants, poste par poste (du plus gros au plus petit). */
+  fundings: [
+    {
+      id: "classes",
+      title: "Budget des 5 classes",
+      description:
+        "1 000 € versés à chaque classe, que les enseignants utilisent librement pour leurs projets : sorties, matériel, complément des séances de ski, cycle roller des CE1-CE2…",
+      icon: "classe",
+      amount: 5000,
+      who: "Les 5 classes",
+    },
+    {
+      id: "classe-verte",
+      title: "Classe verte",
+      description:
+        "Le plus gros coup de pouce de l'année : une participation au séjour en classe nature, pour que son coût ne soit pas un frein pour les familles.",
+      icon: "nature",
+      amount: 3500,
+    },
+    {
+      id: "festirock",
+      title: "Concert des enfants à Festirock",
+      description:
+        "Le groupe qui joue pour les enfants pendant le festival du village est entièrement payé par l'EEF : un vrai concert, rien que pour eux.",
+      icon: "concert",
+      amount: 1534,
+      who: "Toute l'école",
+    },
+    {
+      id: "spectacle-noel",
+      title: "Spectacle de Noël",
+      description: "Un spectacle offert à tous les enfants de l'école juste avant les vacances de Noël.",
+      icon: "spectacle",
+      amount: 230,
+      who: "Toute l'école",
+    },
+    {
+      id: "cadeaux-cm2",
+      title: "Cadeaux des CM2",
+      description: "Un souvenir de l'école offert à chaque élève qui part au collège.",
+      icon: "cadeau",
+      amount: 158,
+      who: "Les CM2",
+    },
+  ],
+};
 
 /* ------------------------------------------------------------
  *  L'ANNÉE EN ÉVÉNEMENTS
@@ -411,13 +372,15 @@ export const projectsSection = {
   kicker: "Ce que l'EEF finance",
   title: "Des événements du village aux projets des enfants",
   intro:
-    "Chaque euro récolté pendant les événements revient aux enfants. Voici ce que l'association leur a apporté l'an dernier, et les projets de classe qu'elle finance cette année.",
+    "Chaque euro récolté pendant les rendez-vous de l'année revient aux enfants. Voici, poste par poste, ce que l'association leur a apporté l'an dernier.",
+  /** Affiché après le montant total (ex : « 10 422 € pour les enfants de l'école »). */
   impactTitle: "pour les enfants de l'école",
+  /** Affiché après le bénéfice des événements. */
   impactText:
     "récoltés par les parents lors des rendez-vous de l'année, complétés par les réserves de l'association : tout est allé aux enfants.",
-  projectsTitle: "Les projets des classes cette année",
-  projectsText:
-    "Pour chaque projet, la jauge montre la part du budget financée par l'EEF.",
+  detailTitle: "Où est allé cet argent",
+  /** Le texte est suivi de l'année (ex : « … versé par l'EEF en 2025-2026. »). */
+  detailText: "Pour chaque poste, la jauge montre sa part dans le total versé par l'EEF en",
 };
 
 export const timelineSection = {

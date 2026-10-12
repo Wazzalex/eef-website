@@ -10,11 +10,13 @@ interface GaugeProps {
   label: string;
   /** "sun" (accent) ou "blue" (action). */
   tone?: "sun" | "blue";
+  /** Couleur libre (prioritaire sur `tone`), ex : celle d'un segment de la barre empilée. */
+  color?: string;
   size?: "sm" | "lg";
 }
 
 /** Barre de progression qui se remplit quand elle entre à l'écran. */
-export default function Gauge({ percent, label, tone = "blue", size = "sm" }: GaugeProps) {
+export default function Gauge({ percent, label, tone = "blue", color, size = "sm" }: GaugeProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const value = Math.max(0, Math.min(100, Math.round(percent)));
@@ -48,7 +50,10 @@ export default function Gauge({ percent, label, tone = "blue", size = "sm" }: Ga
       aria-valuenow={value}
       aria-label={label}
     >
-      <div className={styles.fill} style={{ width: visible ? `${value}%` : "0%" }} />
+      <div
+        className={styles.fill}
+        style={{ width: visible ? `${value}%` : "0%", ...(color ? { background: color } : {}) }}
+      />
     </div>
   );
 }

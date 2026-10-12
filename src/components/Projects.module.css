@@ -103,7 +103,7 @@
   color: var(--color-text-primary);
 }
 
-/* --- projets de l'année --- */
+/* --- le détail, poste par poste --- */
 .projectsHead {
   max-width: 720px;
   margin-bottom: var(--space-md);
@@ -155,11 +155,6 @@
   background: var(--color-background-base);
 }
 
-.previous {
-  background: var(--color-background-surface);
-  border-style: dashed;
-}
-
 .projectHead {
   display: flex;
   align-items: center;
@@ -175,6 +170,7 @@
   width: 44px;
   height: 44px;
   border-radius: var(--radius-sm);
+  /* couleur de fond et d'icône = celles du poste dans la barre de répartition */
   background: var(--color-background-soft);
   color: var(--color-action-primary);
   display: grid;
@@ -239,11 +235,4 @@
   font-size: 0.8125rem;
   color: var(--color-text-muted);
   font-style: italic;
-}
-
-.partners {
-  margin-top: var(--space-lg);
-  font-size: 0.9375rem;
-  color: var(--color-text-muted);
-  max-width: 80ch;
 }

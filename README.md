@@ -10,7 +10,7 @@ envie de donner un coup de main sur les événements.
 
 ## Modifier le contenu
 
-Tout le texte du site (chiffres-clés, bilan, projets financés, calendrier, contact…)
+Tout le texte du site (chiffres-clés, bilan de l'an dernier, calendrier, contact…)
 est dans **un seul fichier** : [`src/content/site.ts`](src/content/site.ts).
 Il est commenté en français ; les composants ne font qu'afficher ce qu'il contient.
 
@@ -21,8 +21,7 @@ Les modifications les plus courantes :
 | Changer l'adresse e-mail qui reçoit les messages  | `CONTACT_EMAIL` en haut du fichier                         |
 | Ajouter ou confirmer la date d'un événement       | `date` et `dateConfirmed` de l'événement dans `seasons`    |
 | Indiquer qui organise un événement                | `leads` (prénoms) ou `leadWanted: true` si on cherche      |
-| Mettre à jour le bilan de l'an dernier            | `lastYear` (bénéfices et répartition de ce qui a été versé) |
-| Changer les projets financés et la part de l'EEF  | le tableau `projects` (`amount`, `totalBudget`, `coFunding`) |
+| Mettre à jour le bilan de l'an dernier (chaque été) | `lastYear` : `label`, `eventsProfit` et la liste `fundings` (un bloc par poste financé) |
 | Changer les chiffres-clés                         | le tableau `keyFigures`                                    |
 | Changer la phrase surlignée du hero               | `hero.highlight`                                           |
 

@@ -1,6 +1,6 @@
-import type { ProjectIcon as IconName } from "@/content/site";
+import type { FundingIcon as IconName } from "@/content/site";
 
-/** Petites icônes en trait, une par type de projet. */
+/** Petites icônes en trait, une par type de poste financé. */
 export default function ProjectIcon({ name }: { name: IconName }) {
   const common = {
     viewBox: "0 0 24 24",
@@ -14,6 +14,53 @@ export default function ProjectIcon({ name }: { name: IconName }) {
   };
 
   switch (name) {
+    case "classe":
+      // tableau d'école sur pieds
+      return (
+        <svg {...common}>
+          <rect x="3" y="4" width="18" height="12" rx="1.5" />
+          <path d="M7 8h7M7 11h10" />
+          <path d="M8 20l4-4 4 4" />
+        </svg>
+      );
+    case "nature":
+      // sapin devant une montagne
+      return (
+        <svg {...common}>
+          <path d="M2 20l6-10 3.5 5.5" />
+          <path d="M9 20l4.5-8L22 20Z" />
+          <path d="M8 20v-2M15 20v-1.5" />
+          <path d="M8 10l-2-3h4Z" />
+        </svg>
+      );
+    case "concert":
+      // note de musique
+      return (
+        <svg {...common}>
+          <path d="M9 18V6l10-2v12" />
+          <circle cx="6.5" cy="18" r="2.5" />
+          <circle cx="16.5" cy="16" r="2.5" />
+        </svg>
+      );
+    case "spectacle":
+      // rideau de scène
+      return (
+        <svg {...common}>
+          <path d="M3 4h18" />
+          <path d="M5 4v16M19 4v16" />
+          <path d="M5 4c3 3 3 8 1 11M19 4c-3 3-3 8-1 11" />
+          <path d="M12 10l1 2.2 2.4.3-1.7 1.7.4 2.4-2.1-1.1-2.1 1.1.4-2.4-1.7-1.7 2.4-.3Z" />
+        </svg>
+      );
+    case "cadeau":
+      // paquet cadeau
+      return (
+        <svg {...common}>
+          <rect x="3" y="9" width="18" height="12" rx="1.5" />
+          <path d="M3 13h18M12 9v12" />
+          <path d="M12 9c-1.5-4-6-4-5-1.5S12 9 12 9Zm0 0c1.5-4 6-4 5-1.5S12 9 12 9Z" />
+        </svg>
+      );
     case "cirque":
       return (
         <svg {...common}>
@@ -45,14 +92,6 @@ export default function ProjectIcon({ name }: { name: IconName }) {
           <path d="M12 21c4 0 7-3.2 7-7.5C19 8.5 15.5 3 12 3S5 8.5 5 13.5C5 17.8 8 21 12 21Z" />
           <path d="M9 14c1 1 5 1 6 0" />
           <path d="M10 10h.01M14 10h.01" />
-        </svg>
-      );
-    case "classe":
-      return (
-        <svg {...common}>
-          <path d="M3 19 9 8l3 5 2-3 7 9Z" />
-          <path d="M4 5l4 1M20 5l-4 1" />
-          <path d="M6 5V3M18 5V3" />
         </svg>
       );
     case "numerique":
