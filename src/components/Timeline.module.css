@@ -123,11 +123,33 @@
 }
 
 .month {
-  font-weight: 700;
-  font-size: 0.8125rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
   color: var(--color-action-primary);
+}
+
+.toConfirm {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  border: 1.5px dashed var(--color-action-primary);
+  color: var(--color-action-primary);
+}
+
+.leads {
+  font-size: 0.9375rem;
+}
+
+.leads strong {
+  color: var(--color-action-primary);
+}
+
+.leadWanted {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-accent-coral);
 }
 
 .badge {

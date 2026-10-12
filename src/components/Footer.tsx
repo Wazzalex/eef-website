@@ -1,10 +1,10 @@
-import { CONTACT_EMAIL, FORM_URL, association, contactSection } from "@/content/site";
-import { fr, helpLink } from "@/lib/format";
+import { CONTACT_EMAIL, association, contactSection } from "@/content/site";
+import { fr } from "@/lib/format";
 import { asset } from "@/lib/assets";
+import ContactForm from "./ContactForm";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
-  const help = helpLink(FORM_URL);
   const year = new Date().getFullYear();
 
   return (
@@ -14,18 +14,10 @@ export default function Footer() {
           <span className={`kicker ${styles.kicker}`}>{contactSection.kicker}</span>
           <h2>{fr(contactSection.title)}</h2>
           <p className={styles.text}>{fr(contactSection.text)}</p>
-          {help.external ? (
-            <a className="btn btn--sun" href={help.href} target="_blank" rel="noopener">
-              {contactSection.cta}
-            </a>
-          ) : (
-            <p className={styles.fallback}>{fr(contactSection.fallback)}</p>
-          )}
-          {CONTACT_EMAIL ? (
-            <p className={styles.email}>
-              Par e-mail : <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
-            </p>
-          ) : null}
+          <ContactForm />
+          <p className={styles.email}>
+            Ou directement par e-mail : <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>
+          </p>
         </div>
 
         <div className={styles.brand}>

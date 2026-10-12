@@ -10,23 +10,31 @@ envie de donner un coup de main sur les événements.
 
 ## Modifier le contenu
 
-Tout le texte du site (chiffres-clés, projets financés, calendrier, lien du formulaire…)
+Tout le texte du site (chiffres-clés, bilan, projets financés, calendrier, contact…)
 est dans **un seul fichier** : [`src/content/site.ts`](src/content/site.ts).
 Il est commenté en français ; les composants ne font qu'afficher ce qu'il contient.
 
 Les modifications les plus courantes :
 
-| Je veux…                                        | Où ?                                                 |
-| ----------------------------------------------- | ---------------------------------------------------- |
-| Brancher le Google Form « Je veux aider »        | `FORM_URL` en haut du fichier                        |
-| Mettre à jour la jauge après un événement        | `raisedThisYear` de l'événement dans `seasons`       |
-| Ajouter la date précise d'un événement           | `date: "samedi 14 novembre"` dans l'événement        |
-| Changer les projets financés                     | le tableau `projects`                                |
-| Changer les chiffres-clés                        | le tableau `keyFigures`                              |
-| Afficher une adresse e-mail dans le pied de page | `CONTACT_EMAIL`                                      |
+| Je veux…                                          | Où ?                                                       |
+| ------------------------------------------------- | ---------------------------------------------------------- |
+| Changer l'adresse e-mail qui reçoit les messages  | `CONTACT_EMAIL` en haut du fichier                         |
+| Ajouter ou confirmer la date d'un événement       | `date` et `dateConfirmed` de l'événement dans `seasons`    |
+| Indiquer qui organise un événement                | `leads` (prénoms) ou `leadWanted: true` si on cherche      |
+| Mettre à jour le bilan de l'an dernier            | `lastYear` (bénéfices et répartition de ce qui a été versé) |
+| Changer les projets financés et la part de l'EEF  | le tableau `projects` (`amount`, `totalBudget`, `coFunding`) |
+| Changer les chiffres-clés                         | le tableau `keyFigures`                                    |
+| Changer la phrase surlignée du hero               | `hero.highlight`                                           |
 
 Le logo maître est dans `public/logo.svg` (exporté depuis le fichier Figma) ; ses déclinaisons
 blanche et bleue sont générées automatiquement avant chaque build (`scripts/logo-variants.mjs`).
+
+## Formulaire de contact
+
+Le site est statique (pas de serveur) : le formulaire du pied de page compose un e-mail
+prérempli (destinataire `CONTACT_EMAIL`, événement choisi, message) et l'ouvre dans
+l'application e-mail du visiteur, qui n'a plus qu'à cliquer sur « Envoyer ». Les boutons
+« Je veux aider » de la timeline présélectionnent l'événement concerné.
 
 ## Mise en ligne
 
@@ -55,7 +63,7 @@ il suffit de retirer cette variable du workflow et d'ajouter un fichier `public/
 ```
 src/
   app/            layout, page d'accueil, styles globaux (tokens de la charte), favicon
-  components/     un composant par section : Header, Hero, KeyFigures, About, Projects, Timeline, Footer
+  components/     un composant par section : Header, Hero, KeyFigures, About, Projects (+ StackedBar, Gauge), Timeline, Footer (+ ContactForm)
   components/illustrations/  panorama de Belledonne et icônes des projets (SVG)
   content/site.ts TOUT LE CONTENU ÉDITABLE
   lib/            petites fonctions utilitaires (format des montants, typographie, chemins des fichiers)

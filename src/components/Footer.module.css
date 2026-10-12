@@ -33,16 +33,9 @@
   opacity: 0.95;
 }
 
-.fallback {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-sm);
-  padding: var(--space-sm) var(--space-md);
-  max-width: 56ch;
-}
-
 .email {
-  margin-top: var(--space-sm);
+  margin-top: var(--space-md);
+  font-size: 0.9375rem;
 }
 
 .email a {
