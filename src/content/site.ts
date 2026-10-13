@@ -226,7 +226,7 @@ export const seasons: Season[] = [
           "Le grand repas convivial du village, préparé et servi par les parents : 180 repas le dimanche midi à l'école des Adrets, et toute la préparation dès le samedi 7 après-midi. Pas besoin de savoir cuisiner, et personne n'est seul à son poste.",
         kind: "event",
         help: "éplucher, cuisiner, installer la salle, vendre les tickets, servir, tenir la caisse, faire la plonge, ranger — 88 petits créneaux d'une à trois heures",
-        leads: ["Alexandre T."],
+        leads: ["Alexandre T.", "Maxime", "Stéphane"],
         raised: 1387,
         featured: true,
         signupUrl: POTEE_SIGNUP_URL,
@@ -348,7 +348,7 @@ export const seasons: Season[] = [
           "LE festival du village : concerts, buvette, restauration… et un concert pour les enfants, offert par l'EEF.",
         kind: "event",
         help: "montage, bar, restauration, accueil, démontage — il faut du monde !",
-        leads: ["Alexandre T.", "Stéphane"],
+        leads: ["Alexandre T.", "Freddy", "Sophie", "Stéphane", "Thibaut"],
         raised: 4172,
       },
       {
