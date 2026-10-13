@@ -396,7 +396,7 @@ export const bureau: BoardMember[] = [
  * ------------------------------------------------------------ */
 export const hero = {
   kicker: "Association de parents d'élèves · Les Adrets-en-Belledonne",
-  title: "Aux Adrets, ce sont les parents qui font grandir l'école.",
+  title: "Aux Adrets, les parents aident à faire grandir l'école.",
   text: "Depuis 25 ans, École en Fête organise les rendez-vous du village pour financer les projets des enfants : cirque, livres, sorties, ski, spectacles… Vous êtes parent d'un élève ? Vous en faites déjà partie.",
   /** Passage du texte ci-dessus à surligner (doit être recopié à l'identique). */
   highlight: "Vous en faites déjà partie.",
@@ -459,7 +459,7 @@ export const timelineSection = {
 
 export const bureauSection = {
   kicker: "Le bureau",
-  title: "Les parents qui font tourner l'association",
+  title: "Le bureau cette année",
   intro:
     "Élus chaque année à l'assemblée générale de rentrée, ils coordonnent les événements et tiennent les comptes. Vous les croisez à la sortie de l'école : n'hésitez pas à les aborder !",
 };
