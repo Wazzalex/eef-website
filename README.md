@@ -10,7 +10,7 @@ envie de donner un coup de main sur les événements.
 
 ## Modifier le contenu
 
-Tout le texte du site (chiffres-clés, bilan de l'an dernier, calendrier, contact…)
+Tout le texte du site (chiffres-clés, bilan de l'an dernier, calendrier, bureau, contact…)
 est dans **un seul fichier** : [`src/content/site.ts`](src/content/site.ts).
 Il est commenté en français ; les composants ne font qu'afficher ce qu'il contient.
 
@@ -24,6 +24,7 @@ Les modifications les plus courantes :
 | Mettre à jour le bilan de l'an dernier (chaque été) | `lastYear` : `label`, `eventsProfit` et la liste `fundings` (un bloc par poste financé) |
 | Changer les chiffres-clés                         | le tableau `keyFigures`                                    |
 | Changer la phrase surlignée du hero               | `hero.highlight`                                           |
+| Mettre à jour les membres du bureau               | le tableau `bureau` (photos dans `public/bureau/`, miniatures carrées) |
 
 Le logo maître est dans `public/logo.svg` (exporté depuis le fichier Figma) ; ses déclinaisons
 blanche et bleue sont générées automatiquement avant chaque build (`scripts/logo-variants.mjs`).
@@ -62,10 +63,10 @@ il suffit de retirer cette variable du workflow et d'ajouter un fichier `public/
 ```
 src/
   app/            layout, page d'accueil, styles globaux (tokens de la charte), favicon
-  components/     un composant par section : Header, Hero, KeyFigures, About, Projects (+ StackedBar, Gauge), Timeline, Footer (+ ContactForm)
+  components/     un composant par section : Header, Hero, KeyFigures, About, Projects (+ StackedBar, Gauge), Timeline, Bureau, Footer (+ ContactForm)
   components/illustrations/  panorama de Belledonne et icônes des projets (SVG)
   content/site.ts TOUT LE CONTENU ÉDITABLE
   lib/            petites fonctions utilitaires (format des montants, typographie, chemins des fichiers)
-public/           logo et fichiers statiques
+public/           logo, photos du bureau (public/bureau/) et fichiers statiques
 scripts/          génération des déclinaisons du logo
 ```

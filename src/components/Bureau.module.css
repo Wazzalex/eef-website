@@ -1,0 +1,66 @@
+.section {
+  background: var(--color-background-surface);
+  border-top: 1px solid var(--color-border-default);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-sm);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-lg) var(--space-md);
+  }
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-2xs);
+}
+
+/* Les photos sont de petites miniatures : affichées en rond et en petit, elles restent nettes. */
+.photo {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  background: var(--color-background-soft);
+  box-shadow:
+    0 0 0 3px var(--color-background-surface),
+    0 0 0 5px var(--color-accent-sun),
+    var(--shadow-soft);
+  margin-bottom: var(--space-xs);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.2;
+}
+
+.lastName {
+  display: block;
+  font-weight: 500;
+}
+
+.role {
+  font-size: 0.875rem;
+  color: var(--color-action-primary);
+  font-weight: 700;
+}

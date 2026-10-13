@@ -4,26 +4,24 @@
   padding-block: var(--space-xl);
 }
 
+/* flex plutôt que grid : 5 tuiles sur une ligne en large, 3 + 2 puis 2 + 2 + 1 centrées en dessous */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-lg) var(--space-md);
 }
 
-@media (min-width: 840px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
 .item {
+  flex: 1 1 150px;
+  max-width: 260px;
   text-align: center;
 }
 
 .value {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.25rem, 3vw + 1rem, 3.25rem);
+  font-size: clamp(2rem, 2.2vw + 0.75rem, 3rem);
   line-height: 1;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -45,6 +43,6 @@
   margin-top: var(--space-xs);
   font-size: 0.9375rem;
   opacity: 0.92;
-  max-width: 22ch;
+  max-width: 20ch;
   margin-inline: auto;
 }

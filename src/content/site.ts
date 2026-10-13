@@ -33,6 +33,8 @@ export const keyFigures = [
   { value: "25", unit: "ans", label: "au service des enfants de l'école" },
   { value: "600", prefix: "≈", unit: "enfants", label: "accompagnés depuis la création" },
   { value: "150 000", unit: "€", prefix: "≈", label: "reversés à l'école en 25 ans" },
+  /** Moyenne des trois dernières années du bilan (8 122 €, 6 483 € et 10 422 €). */
+  { value: "8 300", unit: "€", prefix: "≈", label: "offerts aux enfants chaque année" },
   { value: "10", unit: "rendez-vous", label: "organisés chaque année par les parents" },
 ];
 
@@ -115,10 +117,12 @@ export const lastYear: { label: string; eventsProfit: number; fundings: Funding[
     {
       id: "spectacle-noel",
       title: "Spectacle de Noël",
-      description: "Un spectacle offert à tous les enfants de l'école juste avant les vacances de Noël.",
+      description:
+        "Un spectacle offert à tous les enfants de l'école juste avant les vacances, financé à trois : l'EEF, l'association de la cantine et la mairie.",
       icon: "spectacle",
       amount: 230,
       who: "Toute l'école",
+      note: "Part de l'EEF ; la cantine et la mairie complètent.",
     },
     {
       id: "cadeaux-cm2",
@@ -221,7 +225,8 @@ export const seasons: Season[] = [
         id: "spectacle-noel",
         month: "Décembre",
         title: "Spectacle de Noël",
-        description: "Un spectacle offert à tous les enfants de l'école, financé par les événements de l'automne.",
+        description:
+          "Un spectacle offert à tous les enfants de l'école par l'EEF, l'association de la cantine et la mairie, grâce aux événements de l'automne.",
         kind: "gift",
       },
       {
@@ -335,6 +340,29 @@ export const seasons: Season[] = [
 ];
 
 /* ------------------------------------------------------------
+ *  LE BUREAU (élu à l'assemblée générale de rentrée)
+ *
+ *  photo : fichier JPEG dans public/bureau/ (miniature carrée, ≈ 160 px,
+ *          à déposer sur GitHub via « Add file → Upload files » ; Claude
+ *          peut préparer le recadrage). L'ordre ci-dessous = ordre d'affichage.
+ * ------------------------------------------------------------ */
+export interface BoardMember {
+  firstName: string;
+  lastName: string;
+  role: string;
+  photo: string;
+}
+
+export const bureau: BoardMember[] = [
+  { firstName: "Alexandre", lastName: "Vernhet", role: "Président", photo: "/bureau/alexandre-vernhet.jpg" },
+  { firstName: "Alexandre", lastName: "Tilleman", role: "Vice-président", photo: "/bureau/alexandre-tilleman.jpg" },
+  { firstName: "Chloé", lastName: "Gorria", role: "Trésorière", photo: "/bureau/chloe-gorria.jpg" },
+  { firstName: "Mailin", lastName: "Pohlmann", role: "Vice-trésorière", photo: "/bureau/mailin-pohlmann.jpg" },
+  { firstName: "Maëlle", lastName: "Sivy Sicard", role: "Secrétaire", photo: "/bureau/maelle-sivy-sicard.jpg" },
+  { firstName: "Élodie", lastName: "Marconnier", role: "Vice-secrétaire", photo: "/bureau/elodie-marconnier.jpg" },
+];
+
+/* ------------------------------------------------------------
  *  TEXTES DES SECTIONS
  * ------------------------------------------------------------ */
 export const hero = {
@@ -394,6 +422,13 @@ export const timelineSection = {
   leadsLabel: "Organisé par",
   leadWanted: "On cherche un·e responsable !",
   toConfirm: "date à confirmer",
+};
+
+export const bureauSection = {
+  kicker: "Le bureau",
+  title: "Les parents qui font tourner l'association",
+  intro:
+    "Élus chaque année à l'assemblée générale de rentrée, ils coordonnent les événements et tiennent les comptes. Vous les croisez à la sortie de l'école : n'hésitez pas à les aborder !",
 };
 
 export const contactSection = {

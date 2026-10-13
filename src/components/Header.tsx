@@ -9,6 +9,7 @@ const links = [
   { href: "#association", label: "L'association" },
   { href: "#projets", label: "Les projets" },
   { href: "#agenda", label: "L'année" },
+  { href: "#bureau", label: "Le bureau" },
   { href: "#contact", label: "Contact" },
 ];
 
