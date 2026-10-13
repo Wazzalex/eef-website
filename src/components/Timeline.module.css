@@ -214,3 +214,46 @@
   font-weight: 700;
   font-size: 1.125rem;
 }
+
+/* --- événement mis en avant (prochain rendez-vous, inscriptions ouvertes) --- */
+.featured .dot {
+  border-color: var(--color-accent-sun);
+  background: var(--color-accent-sun);
+  box-shadow: 0 0 0 4px rgba(245, 196, 81, 0.35);
+}
+
+.featured .card {
+  background: var(--color-background-base);
+  border: 2px solid var(--color-accent-sun);
+  box-shadow: var(--shadow-soft);
+}
+
+.featured .title {
+  font-size: 1.5rem;
+}
+
+.featuredBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-sun);
+  color: var(--color-text-primary);
+}
+
+.openBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-coral);
+  color: var(--color-text-inverse);
+}
+
+.signupNote {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-top: calc(-1 * var(--space-2xs));
+}

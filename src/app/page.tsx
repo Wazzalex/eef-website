@@ -1,3 +1,4 @@
+import Announcement from "@/components/Announcement";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import KeyFigures from "@/components/KeyFigures";
@@ -13,6 +14,7 @@ export default function HomePage() {
       <a className="skip-link" href="#contenu">
         Aller au contenu
       </a>
+      <Announcement />
       <Header />
       <main id="contenu">
         <Hero />

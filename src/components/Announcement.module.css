@@ -1,0 +1,41 @@
+.bar {
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xs) var(--space-md);
+  padding-block: 10px;
+}
+
+.text {
+  flex: 1 1 320px;
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.emoji {
+  margin-right: 8px;
+}
+
+.detail {
+  opacity: 0.85;
+}
+
+@media (max-width: 639px) {
+  .detail {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+.cta {
+  flex-shrink: 0;
+  margin-left: auto;
+}

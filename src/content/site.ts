@@ -16,6 +16,23 @@
 /** Adresse e-mail de l'association : destinataire du formulaire de contact. */
 export const CONTACT_EMAIL = "ecolenfete@gmail.com";
 
+/** Feuille d'inscription des bénévoles de la Potée 2026 (s'ouvre dans un nouvel onglet). */
+export const POTEE_SIGNUP_URL =
+  "https://docs.google.com/spreadsheets/d/1Az6TSACTbhzmk0DSqVkOPiliGvA5ATC3lIzLCI1GaIw/edit?usp=sharing";
+
+/* ------------------------------------------------------------
+ *  BANDEAU D'ANNONCE (tout en haut du site)
+ *  enabled: false pour le masquer, par exemple une fois la Potée passée.
+ * ------------------------------------------------------------ */
+export const announcement = {
+  enabled: true,
+  emoji: "🍲",
+  text: "Potée de la Fête d'automne, dimanche 8 novembre : on a besoin de vous !",
+  detail: "Inscriptions bénévoles ouvertes, même pour une heure.",
+  cta: "Je m'inscris",
+  href: POTEE_SIGNUP_URL,
+};
+
 export const association = {
   name: "École en Fête",
   shortName: "EEF",
@@ -148,6 +165,9 @@ export const lastYear: { label: string; eventsProfit: number; fundings: Funding[
  *  leads         : prénoms des responsables de l'événement
  *  leadWanted    : true = on cherche un·e responsable (affiché sur la carte)
  *  raised        : bénéfice de l'événement l'an dernier, en euros
+ *  featured      : true = carte mise en avant (prochain rendez-vous)
+ *  signupUrl     : lien d'inscription des bénévoles (nouvel onglet) ;
+ *                  remplace le bouton « Je veux aider » par « Je m'inscris »
  * ------------------------------------------------------------ */
 export type EventKind = "event" | "meeting" | "gift";
 
@@ -165,6 +185,12 @@ export interface SeasonEvent {
   leadWanted?: boolean;
   /** Bénéfice de l'événement l'an dernier, en euros. */
   raised?: number | null;
+  /** Mise en avant (badge « Prochain rendez-vous », carte colorée). */
+  featured?: boolean;
+  /** Lien d'inscription des bénévoles, ouvert dans un nouvel onglet. */
+  signupUrl?: string;
+  /** Petite phrase affichée sous le bouton d'inscription (facultatif). */
+  signupNote?: string;
 }
 
 export interface Season {
@@ -195,13 +221,16 @@ export const seasons: Season[] = [
         month: "Novembre",
         date: "Dimanche 8 novembre 2026",
         dateConfirmed: true,
-        title: "La Potée",
+        title: "La Potée de la Fête d'automne",
         description:
-          "Le grand repas convivial du village, préparé et servi par les parents. Le rendez-vous le plus chaleureux de l'année.",
+          "Le grand repas convivial du village, préparé et servi par les parents : 180 repas le dimanche midi à l'école des Adrets, et toute la préparation dès le samedi 7 après-midi. Pas besoin de savoir cuisiner, et personne n'est seul à son poste.",
         kind: "event",
-        help: "cuisine, service, installation et rangement de la salle",
+        help: "éplucher, cuisiner, installer la salle, vendre les tickets, servir, tenir la caisse, faire la plonge, ranger — 88 petits créneaux d'une à trois heures",
         leads: ["Alexandre T."],
         raised: 1387,
+        featured: true,
+        signupUrl: POTEE_SIGNUP_URL,
+        signupNote: "Choisissez un créneau et écrivez votre nom dans la feuille : c'est tout.",
       },
     ],
   },
@@ -417,6 +446,10 @@ export const timelineSection = {
   intro:
     "Une dizaine de rendez-vous par an, portés par les parents. Chacun finance une partie des projets des enfants : choisissez celui qui vous plaît et dites-le-nous.",
   cta: "Je veux aider",
+  /** Bouton des événements qui ont une feuille d'inscription (`signupUrl`). */
+  signupCta: "Je m'inscris",
+  featuredBadge: "Prochain rendez-vous",
+  signupOpen: "Inscriptions ouvertes",
   raisedLabel: "L'an dernier",
   helpLabel: "On a besoin de vous pour",
   leadsLabel: "Organisé par",
