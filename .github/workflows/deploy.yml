@@ -27,10 +27,7 @@ jobs:
           node-version: 22
       - run: npm install --no-audit --no-fund
       - run: npm run build
-        env:
-          # Le site est servi sous https://wazzalex.github.io/eef-website/
-          # → à retirer le jour où un nom de domaine est branché.
-          NEXT_PUBLIC_BASE_PATH: /eef-website
+        
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
