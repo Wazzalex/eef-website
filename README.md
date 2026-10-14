@@ -4,7 +4,7 @@ Site vitrine de l'association des parents d'élèves de l'école des Adrets-en-B
 Son objectif : montrer aux parents l'impact de l'association sur les enfants et leur donner
 envie de donner un coup de main sur les événements.
 
-- **Adresse** : https://wazzalex.github.io/eef-website/
+- **Adresse** : https://ecoleenfete-lesadrets.fr (https://eef-lesadrets.fr y redirige)
 - **Charte graphique** : version « Ciel de Belledonne » du fichier Figma *Charte-EEF*
 - **Stack** : Next.js 16 · TypeScript · CSS modules — export statique, hébergé sur GitHub Pages
 
@@ -56,9 +56,20 @@ npm run build      # génère le site statique dans out/
 npm run typecheck  # vérifie les types
 ```
 
-Le site est servi sous `/eef-website/` sur GitHub Pages : cette valeur est passée par la
-variable `NEXT_PUBLIC_BASE_PATH` dans le workflow. Le jour où un nom de domaine est branché,
-il suffit de retirer cette variable du workflow et d'ajouter un fichier `public/CNAME`.
+## Nom de domaine
+
+Le site est servi à la racine de **ecoleenfete-lesadrets.fr** (domaines achetés chez OVH) :
+
+- **GitHub** : Settings → Pages → *Custom domain* = `ecoleenfete-lesadrets.fr`, *Enforce HTTPS* coché
+  (le certificat HTTPS est fourni gratuitement par GitHub). Avec une publication par GitHub Actions,
+  aucun fichier `CNAME` n'est nécessaire.
+- **OVH** (zone DNS de `ecoleenfete-lesadrets.fr`) : 4 enregistrements `A` vers 185.199.108.153,
+  185.199.109.153, 185.199.110.153, 185.199.111.153 ; 4 enregistrements `AAAA` vers
+  2606:50c0:8000::153, 2606:50c0:8001::153, 2606:50c0:8002::153, 2606:50c0:8003::153 ;
+  un `CNAME` `www` vers `wazzalex.github.io.` (www redirige automatiquement vers l'adresse sans www).
+  Les enregistrements `MX` et `TXT spf` d'OVH (e-mails) ne sont pas touchés.
+- L'adresse de base du site (balises de partage, `robots.txt`, `sitemap.xml`) est `SITE_URL`
+  dans `src/content/site.ts`.
 
 ## Structure
 

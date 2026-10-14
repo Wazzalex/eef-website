@@ -13,6 +13,9 @@
  *   - respecter les guillemets et les virgules
  */
 
+/** Adresse du site (nom de domaine principal, sans « / » final). */
+export const SITE_URL = "https://ecoleenfete-lesadrets.fr";
+
 /** Adresse e-mail de l'association : destinataire du formulaire de contact. */
 export const CONTACT_EMAIL = "ecolenfete@gmail.com";
 

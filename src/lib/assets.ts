@@ -1,6 +1,6 @@
 /**
  * Préfixe un chemin de fichier du dossier `public/` avec le basePath du site
- * (« /eef-website » sur GitHub Pages, rien avec un nom de domaine).
+ * (vide avec le nom de domaine ; « /eef-website » si le site était servi dans un sous-dossier).
  */
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
