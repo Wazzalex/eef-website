@@ -27,6 +27,7 @@ Les modifications les plus courantes :
 | Mettre à jour les membres du bureau               | le tableau `bureau` (photos dans `public/bureau/`, miniatures carrées) |
 | Afficher ou masquer le bandeau d'annonce en haut   | `announcement` (`enabled: true` / `false`, texte, bouton, lien)  |
 | Mettre un événement en avant avec une inscription | `featured: true` et `signupUrl` sur l'événement dans `seasons`     |
+| Clore un événement passé et afficher son résultat | `done: true`, `result` (montant) et `resultNote` (merci) sur l'événement |
 
 Le logo maître est dans `public/logo.svg` (exporté depuis le fichier Figma) ; ses déclinaisons
 blanche et bleue sont générées automatiquement avant chaque build (`scripts/logo-variants.mjs`).

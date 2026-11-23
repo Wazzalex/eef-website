@@ -54,14 +54,16 @@ export default function Timeline() {
                   return (
                     <li
                       key={ev.id}
-                      className={`${styles.item} ${styles[ev.kind]} ${ev.featured ? styles.featured : ""}`}
+                      className={`${styles.item} ${styles[ev.kind]} ${ev.featured ? styles.featured : ""} ${ev.done ? styles.done : ""}`}
                     >
                       <span className={styles.dot} aria-hidden="true" />
                       <article className={styles.card}>
                         <div className={styles.meta}>
                           <span className={styles.month}>{showDate}</span>
                           {toConfirm ? <span className={styles.toConfirm}>{timelineSection.toConfirm}</span> : null}
-                          {ev.featured ? (
+                          {ev.done ? (
+                            <span className={styles.doneBadge}>{fr(timelineSection.doneBadge)}</span>
+                          ) : ev.featured ? (
                             <span className={styles.featuredBadge}>{timelineSection.featuredBadge}</span>
                           ) : (
                             <span className={styles.badge}>{kindLabel[ev.kind]}</span>
@@ -84,8 +86,18 @@ export default function Timeline() {
                         ) : null}
                         {ev.leadWanted ? <p className={styles.leadWanted}>{fr(timelineSection.leadWanted)}</p> : null}
 
+                        {ev.done && ev.resultNote ? <p className={styles.resultNote}>{fr(ev.resultNote)}</p> : null}
+
                         <div className={styles.foot}>
-                          {ev.raised ? (
+                          {ev.result ? (
+                            <p className={`${styles.raised} ${styles.result}`}>
+                              <span className={styles.raisedLabel}>{timelineSection.resultLabel}</span>
+                              <span className={styles.raisedValue}>
+                                {ev.result.approx ? "près de " : ""}
+                                {formatEuro(ev.result.amount)} pour les enfants
+                              </span>
+                            </p>
+                          ) : ev.raised ? (
                             <p className={styles.raised}>
                               <span className={styles.raisedLabel}>{timelineSection.raisedLabel}</span>
                               <span className={styles.raisedValue}>{formatEuro(ev.raised)} pour les enfants</span>
@@ -104,7 +116,7 @@ export default function Timeline() {
                               {timelineSection.signupCta}
                               <ExternalIcon />
                             </a>
-                          ) : ev.kind !== "gift" ? (
+                          ) : ev.kind !== "gift" && !ev.done ? (
                             <a
                               className="btn btn--primary btn--small"
                               href="#contact"

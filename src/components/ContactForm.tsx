@@ -5,8 +5,11 @@ import { CONTACT_EMAIL, contactSection, seasons } from "@/content/site";
 import { fr } from "@/lib/format";
 import styles from "./ContactForm.module.css";
 
-/** Liste des événements proposés dans le menu déroulant (hors moments offerts). */
-const eventOptions = seasons.flatMap((s) => s.events).filter((e) => e.kind !== "gift").map((e) => e.title);
+/** Liste des événements proposés dans le menu déroulant (hors moments offerts et événements passés). */
+const eventOptions = seasons
+  .flatMap((s) => s.events)
+  .filter((e) => e.kind !== "gift" && !e.done)
+  .map((e) => e.title);
 
 /**
  * Formulaire de contact d'un site statique : il ouvre l'application e-mail

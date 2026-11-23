@@ -19,21 +19,21 @@ export const SITE_URL = "https://ecoleenfete-lesadrets.fr";
 /** Adresse e-mail de l'association : destinataire du formulaire de contact. */
 export const CONTACT_EMAIL = "ecolenfete@gmail.com";
 
-/** Feuille d'inscription des bénévoles de la Potée 2026 (s'ouvre dans un nouvel onglet). */
-export const POTEE_SIGNUP_URL =
-  "https://docs.google.com/spreadsheets/d/1Az6TSACTbhzmk0DSqVkOPiliGvA5ATC3lIzLCI1GaIw/edit?usp=sharing";
+/** Feuille d'inscription des bénévoles du Marché de Noël 2026 (s'ouvre dans un nouvel onglet). */
+export const MARCHE_NOEL_SIGNUP_URL =
+  "https://docs.google.com/spreadsheets/d/1cJQUqiikPOnmt-9sc7H8_2_We4BUldlPv94cxUrH534/edit?usp=sharing";
 
 /* ------------------------------------------------------------
  *  BANDEAU D'ANNONCE (tout en haut du site)
- *  enabled: false pour le masquer, par exemple une fois la Potée passée.
+ *  enabled: false pour le masquer, par exemple une fois l'événement passé.
  * ------------------------------------------------------------ */
 export const announcement = {
   enabled: true,
-  emoji: "🍲",
-  text: "Potée de la Fête d'automne, dimanche 8 novembre : on a besoin de vous !",
+  emoji: "🎄",
+  text: "Marché de Noël, samedi 12 décembre : on a besoin de vous !",
   detail: "Inscriptions bénévoles ouvertes, même pour une heure.",
   cta: "Je m'inscris",
-  href: POTEE_SIGNUP_URL,
+  href: MARCHE_NOEL_SIGNUP_URL,
 };
 
 export const association = {
@@ -171,6 +171,10 @@ export const lastYear: { label: string; eventsProfit: number; fundings: Funding[
  *  featured      : true = carte mise en avant (prochain rendez-vous)
  *  signupUrl     : lien d'inscription des bénévoles (nouvel onglet) ;
  *                  remplace le bouton « Je veux aider » par « Je m'inscris »
+ *  done          : true = événement passé (badge « Merci ! », plus de bouton)
+ *  result        : ce que l'événement a rapporté cette année, en euros
+ *                  (approx: true = affiché « près de … »)
+ *  resultNote    : petite phrase de remerciement sous le résultat
  * ------------------------------------------------------------ */
 export type EventKind = "event" | "meeting" | "gift";
 
@@ -194,6 +198,12 @@ export interface SeasonEvent {
   signupUrl?: string;
   /** Petite phrase affichée sous le bouton d'inscription (facultatif). */
   signupNote?: string;
+  /** Événement passé : badge « Merci ! », plus de bouton d'inscription. */
+  done?: boolean;
+  /** Ce que l'événement a rapporté cette année (affiché à la place de « L'an dernier »). */
+  result?: { amount: number; approx?: boolean };
+  /** Phrase de remerciement affichée sur la carte d'un événement passé. */
+  resultNote?: string;
 }
 
 export interface Season {
@@ -226,14 +236,13 @@ export const seasons: Season[] = [
         dateConfirmed: true,
         title: "La Potée de la Fête d'automne",
         description:
-          "Le grand repas convivial du village, préparé et servi par les parents : 180 repas le dimanche midi à l'école des Adrets, et toute la préparation dès le samedi 7 après-midi. Pas besoin de savoir cuisiner, et personne n'est seul à son poste.",
+          "Le grand repas convivial du village, préparé et servi par les parents : 179 repas servis le dimanche midi à l'école des Adrets, sur place et à emporter.",
         kind: "event",
-        help: "éplucher, cuisiner, installer la salle, vendre les tickets, servir, tenir la caisse, faire la plonge, ranger — 88 petits créneaux d'une à trois heures",
         leads: ["Alexandre T.", "Maxime", "Stéphane"],
         raised: 1387,
-        featured: true,
-        signupUrl: POTEE_SIGNUP_URL,
-        signupNote: "Choisissez un créneau et écrivez votre nom dans la feuille : c'est tout.",
+        done: true,
+        result: { amount: 1450, approx: true },
+        resultNote: "Merci aux plus de trente parents qui ont donné près de 70 coups de main !",
       },
     ],
   },
@@ -247,11 +256,14 @@ export const seasons: Season[] = [
         dateConfirmed: true,
         title: "Marché de Noël",
         description:
-          "Stands, sapins, barbe à papa et pop-corn pour lancer les fêtes tous ensemble.",
+          "Place de l'église des Adrets, de 11 h à 17 h : des sapins coupés le matin même dans les forêts communales (1 m 10 €, 1,50 m 15 €, 2 m 20 €, une vingtaine seulement : venez tôt !), des croque-monsieurs, de la barbe à papa et, si l'autorisation arrive à temps, du jus de pomme chaud.",
         kind: "event",
-        help: "tenir un stand, préparer les gourmandises",
+        help: "couper et transporter les sapins, installer les stands, vendre les sapins, cuire les croque-monsieurs, faire la barbe à papa, ranger — 64 coups de main, souvent d'une heure",
         leads: ["Élodie", "Chloé", "Stéphane"],
         raised: 587,
+        featured: true,
+        signupUrl: MARCHE_NOEL_SIGNUP_URL,
+        signupNote: "Choisissez un créneau et écrivez votre nom dans la feuille : on vous recontacte quelques jours avant. Tout se passe dehors : bonnet et gants !",
       },
       {
         id: "spectacle-noel",
@@ -452,6 +464,9 @@ export const timelineSection = {
   /** Bouton des événements qui ont une feuille d'inscription (`signupUrl`). */
   signupCta: "Je m'inscris",
   featuredBadge: "Prochain rendez-vous",
+  /** Badge et libellé des événements passés (`done`). */
+  doneBadge: "C'est fait, merci !",
+  resultLabel: "Cette année",
   signupOpen: "Inscriptions ouvertes",
   raisedLabel: "L'an dernier",
   helpLabel: "On a besoin de vous pour",
